@@ -8,9 +8,13 @@ module.exports = function(irc, network) {
 		if (typeof chan === "undefined") {
 			return;
 		}
+		var users = chan.users;
 		chan.users = [];
 		_.each(data.names, function(u) {
 			chan.users.push(new User(u));
+		});
+		_.each(users, function(u) {
+			chan.findUser(u.name).away = u.away;
 		});
 		chan.sortUsers();
 		client.emit("users", {

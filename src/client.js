@@ -31,7 +31,8 @@ var events = [
 	"quit",
 	"topic",
 	"welcome",
-	"whois"
+	"whois",
+	"who"
 ];
 var inputs = [
 	"action",
@@ -209,6 +210,7 @@ Client.prototype.connect = function(args) {
 		}
 		setTimeout(function() {
 			irc.write("PING " + network.host);
+			pollWhoIs();
 		}, delay);
 	});
 
@@ -219,6 +221,19 @@ Client.prototype.connect = function(args) {
 			irc.join(join);
 		}
 	});
+
+	var pollWhoIs = function() {
+		for (var i = 0; i < network.channels.length; i++) {
+			var e = network.channels[i];
+			if (e.name.startsWith('#')) {
+					irc.write('WHO ' + e.name)
+			}
+		}
+	}
+
+	setInterval(function() {
+		pollWhoIs();
+	}, 10000);
 };
 
 Client.prototype.input = function(data) {

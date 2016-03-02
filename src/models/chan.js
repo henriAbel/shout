@@ -56,3 +56,9 @@ Chan.prototype.toJSON = function() {
 	clone.messages = clone.messages.slice(-100);
 	return clone;
 };
+
+Chan.prototype.findUser = function (username) {
+	for (var i = 0; i < this.users.length; i++) {
+		if (this.users[i].name === username) return this.users[i];
+	}
+};

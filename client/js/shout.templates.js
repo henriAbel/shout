@@ -199,7 +199,9 @@ templates['user'] = template({"1":function(depth0,helpers,partials,data) {
   var stack1, helper, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", buffer = "";
   stack1 = ((helpers.diff || (depth0 && depth0.diff) || helperMissing).call(depth0, (depth0 != null ? depth0.mode : depth0), {"name":"diff","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data}));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "			<button class=\"user\" style=\"color: #"
+  return buffer + "			<button class=\"user "
+    + escapeExpression(((helpers.awayColor || (depth0 && depth0.awayColor) || helperMissing).call(depth0, (depth0 != null ? depth0.away : depth0), {"name":"awayColor","hash":{},"data":data})))
+    + "\" style=\"color: #"
     + escapeExpression(((helpers.stringcolor || (depth0 && depth0.stringcolor) || helperMissing).call(depth0, (depth0 != null ? depth0.name : depth0), {"name":"stringcolor","hash":{},"data":data})))
     + "\">"
     + escapeExpression(((helper = (helper = helpers.mode || (depth0 != null ? depth0.mode : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"mode","hash":{},"data":data}) : helper)))
