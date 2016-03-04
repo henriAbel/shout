@@ -21,6 +21,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		"build",
 		function() {
+			var done = this.async();
 			grunt.util.spawn({
 				cmd: "node",
 				args: [
@@ -29,7 +30,8 @@ module.exports = function(grunt) {
 					"-e", "tpl",
 					"-f", "client/js/shout.templates.js"
 				]
-			}, function(err) {
+			}, function(err, res, code) {
+				done();
 				if (err) console.log(err);
 			});
 		}

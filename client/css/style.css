@@ -634,9 +634,14 @@ button, .user {
 	color: #84ce88;
 	color: #50a656;
 }
-#chat.no-colors .from .user,
-#chat.no-colors .sidebar .user {
+#chat.no-colors .from .user {
 	color: #50a656 !important;
+}
+#chat .sidebar .user {
+  color: #50a656;
+}
+#chat .sidebar .user.user-away {
+  color: #ccc;
 }
 #chat .text {
 	padding-left: 10px;
@@ -1250,8 +1255,4 @@ button, .user {
 ::-webkit-scrollbar-thumb:vertical {
 	background: rgba(0,0,0,0.5);
 	border-radius: 100px;
-}
-
-.user-away {
-  opacity: .5;
 }
