@@ -232,7 +232,16 @@ module.exports = {
 		// @example  "sslcert/key-cert.pem"
 		// @default  ""
 		//
-		certificate: ""
+		certificate: "",
+
+		//
+		// Https port, http requests will be redirected here
+		//
+		// @type     int
+		// @example  443
+		// @default  443
+		//
+		port: 443
 	},
 
 	//

@@ -32,11 +32,16 @@ module.exports = function(options) {
 		server = require("http");
 		server = server.createServer(app).listen(port, host);
 	} else {
+		http = require("http");
+		http.createServer(function(req, res) {
+			res.writeHead(301, {'location': 'https://' + req.headers['host'] + req.url});
+			res.end();
+		}).listen(port, host);
 		server = require("https");
 		server = server.createServer({
 			key: fs.readFileSync(https.key),
 			cert: fs.readFileSync(https.certificate)
-		}, app).listen(port, host);
+		}, app).listen(config.https.port, host);
 	}
 
 	if ((config.identd || {}).enable) {
