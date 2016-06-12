@@ -10,6 +10,7 @@ var Network = require("./models/network");
 var slate = require("slate-irc");
 var tls = require("tls");
 var Helper = require("./helper");
+var util = require("util");
 
 module.exports = Client;
 
@@ -130,6 +131,19 @@ Client.prototype.connect = function(args) {
 		port: args.port || (args.tls ? 6697 : 6667),
 		rejectUnauthorized: false
 	};
+
+	// Validate port
+	if (isNaN(server.port) || server.port < 0 || server.port >= 65536) {
+		console.log("Client#connect(): port range error");
+		var msg = new Msg({
+			type: Msg.Type.ERROR,
+			text: util.format("Port should be >= 0 and < 65536, but was %s", server.port)
+		});
+		client.emit("msg", {
+			msg: msg
+		});
+		return;
+	}
 
 	if (config.bind) {
 		server.localAddress = config.bind;

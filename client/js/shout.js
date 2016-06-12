@@ -277,6 +277,11 @@ $(function() {
 	}
 
 	socket.on("msg", function(data) {
+		if (data.msg.type == "error") {
+			$("#connect").find(".btn").prop("disabled", false);
+			$(".login-error").html(data.msg.text).removeClass("hidden");
+			return;
+		}
 		var msg = buildChatMessage(data);
 		var target = "#chan-" + data.chan;
 		chat.find(target + " .messages")
@@ -750,6 +755,7 @@ $(function() {
 	forms.on("submit", "form", function(e) {
 		e.preventDefault();
 		var event = "auth";
+		$(".login-error").html("").addClass("hidden");
 		var form = $(this);
 		form.find(".btn")
 			.attr("disabled", true)
